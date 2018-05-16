@@ -1,0 +1,29 @@
+shop:
+  image: dnhsoft/shopware:5.3.7
+  links:
+   - db
+   - mailhog
+  ports:
+   - "8000:80"
+  environment:
+    SWDB_USER: root
+
+db:
+  image: dnhsoft/mysql-utf8:5.7
+  volumes:
+   - ".database:/var/lib/mysql"
+
+pma:
+  image: dnhsoft/phpmyadmin:4.6.3
+  links:
+   - db
+  ports:
+   - "8001:80"
+
+mailhog:
+  image: mailhog/mailhog
+  expose:
+   - "1025"
+   - "8025"
+  ports:
+   - "8025:8025"
